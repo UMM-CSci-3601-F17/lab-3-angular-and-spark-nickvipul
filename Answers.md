@@ -1,6 +1,7 @@
-## Notice anything new in our .gitignore? There are actually multiple .gitignore files in this project. Where are they? Why might we have more than one, and how do they interact?
+# Answers
 
-# Changes in .gitignore 
+
+## Notice anything new in our .gitignore? There are actually multiple .gitignore files in this project. Where are they? Why might we have more than one, and how do they interact?
 
 Added :
 - Intellij+iml Patch
@@ -19,9 +20,8 @@ The client/.gitignore interacts with the files that we want to ignmore at client
 
 ## Note also that there are now multiple build.gradle files as well! Why is this?
 
-# build.gradle
-
 There are different build.gradle across the project for various distinct tests. For example build.gradle in the server directory runs only the server tests like (runServerTests, runAllTests nd buildExecutable) whereas the build.gradle in the client directory runs the client test like (runClient, runClientTestsAndWatch, runClientTestWithCoverage, runE2ETest and runClientTests).
 
+## How does the navbar work in this project? Is our SparkJava server the only thing doing routing?
 
 
