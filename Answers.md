@@ -1,6 +1,5 @@
 # Answers
 
-
 ## Notice anything new in our .gitignore? There are actually multiple .gitignore files in this project. Where are they? Why might we have more than one, and how do they interact?
 
 Added :
@@ -24,4 +23,4 @@ There are different build.gradle across the project for various distinct tests. 
 
 ## How does the navbar work in this project? Is our SparkJava server the only thing doing routing?
 
-
+The nav bar is the navigation bar, usually at the top of a random html page. It contains links that directs the user to pages like /about, /[facilities etc.] for the specific website. Therefore, we can say it is where the site's main informative pages are loaded or seen from.
