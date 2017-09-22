@@ -85,5 +85,5 @@ Why might we have more than one, and how do they interact?
 as well! Why is this?
 1. :question: How does the navbar work in this project? Is our SparkJava server
 the only thing doing routing?
-1. :question: What does the `user-list.service.ts` do? Why is it not just done in
-the `user-list.component.ts`?
+1. :question: What does the `todo-list.service.ts` do? Why is it not just done in
+the `todo-list.component.ts`?
