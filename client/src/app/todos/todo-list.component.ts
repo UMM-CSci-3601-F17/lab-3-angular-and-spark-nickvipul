@@ -1,48 +1,74 @@
 import {Component, OnInit} from '@angular/core';
-import {UserListService} from "./todo-list.service";
-import {User} from "./todo";
+import {TodoListService} from "./todo-list.service";
+import {todo} from "./todo";
 
 @Component({
-    selector: 'user-list-component',
+    selector: 'todo-list-component',
     templateUrl: 'todo-list.component.html',
     providers: []
 })
 
-export class UserListComponent implements OnInit {
+export class TodoListComponent implements OnInit {
     //These are public so that tests can reference them (.spec.ts)
-    public users: User[];
-    public filteredUsers: User[];
+    public todo: todo[];
+    public filteredTodos: todo[];
 
-    //Inject the UserListService into this component.
+    //Inject the TodoListService into this component.
     //That's what happens in the following constructor.
     //
     //We can call upon the service for interacting
     //with the server.
-    constructor(private userListService: UserListService) {
+    constructor(private todoListService: TodoListService) {
 
     }
 
-    public filterUsers(searchName: string, searchAge: number): User[] {
+    public filterTodos(searchOwner: string, searchStatus: string, searchBody: string, searchCategory:string, limitTodos: number): todo[] {
 
-        this.filteredUsers = this.users;
+        this.filteredTodos = this.todos;
 
-        //Filter by name
-        if (searchName != null) {
-            searchName = searchName.toLocaleLowerCase();
+        // Filter by owner
+        if (searchOwner != null) {
+            searchOwner = searchOwner.toLocaleLowerCase();
 
-            this.filteredUsers = this.filteredUsers.filter(user => {
-                return !searchName || user.name.toLowerCase().indexOf(searchName) !== -1;
+            this.filteredTodos = this.filteredTodos.filter(todo => {
+                return !searchOwner || todo.owner.toLowerCase().indexOf(searchOwner) !== -1;
             });
         }
 
-        //Filter by age
-        if (searchAge != null) {
-            this.filteredUsers = this.filteredUsers.filter(user => {
-                return !searchAge || user.age == searchAge;
+        // Filter by status
+        if (searchStatus != null) {
+            this.filteredTodos = this.filteredTodos.filter(todo => {
+                return !searchStatus || todo.status.toString().toLowerCase().indexOf(searchStatus) !== -1;
             });
         }
 
-        return this.filteredUsers;
+        // Filter by body
+        if(searchBody != null) {
+            searchBody = searchBody.toLocaleLowerCase();
+
+            this.filteredTodos = this.filteredTodos.filter(todo => {
+                return !searchBody || todo.body.toLowerCase().indexOf(searchBody) !== -1;
+            })
+        }
+
+        // Filter by category
+        if (searchCategory != null) {
+            searchCategory = searchCategory.toLocaleLowerCase();
+
+            this.filteredTodos = this.filteredTodos.filter(todo => {
+                return !searchCategory || todo.category.toLowerCase().indexOf(searchCategory) !== -1;
+            })
+        }
+
+        // Limit todos
+        if(limitTodos != null) {
+            this.filteredTodos = this.filteredTodos.filter(todo => {
+
+            })
+        }
+
+
+        return this.filteredTodos;
     }
 
     ngOnInit(): void {
@@ -51,10 +77,10 @@ export class UserListComponent implements OnInit {
         //
         //Subscribe waits until the data is fully downloaded, then
         //performs an action on it (the first lambda)
-        this.userListService.getUsers().subscribe(
-            users => {
-                this.users = users;
-                this.filteredUsers = this.users;
+        this.todoListService.getTodos().subscribe(
+            todos => {
+                this.todos = todos;
+                this.filteredTodos = this.todos;
             },
             err => {
                 console.log(err);
