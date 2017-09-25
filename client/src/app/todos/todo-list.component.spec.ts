@@ -62,25 +62,25 @@ describe("Todo list", () => {
         expect(todoList.todos.length).toBe(3);
     });
 
-    it("contains a user named 'Nick'", () => {
+    it("contains a todo named 'Nick'", () => {
         expect(todoList.todos.some((todo: todo) => todo.name === "Nick")).toBe(true);
     });
 
-    it("contain a user named 'Vipul'", () => {
+    it("contain a todo named 'Vipul'", () => {
         expect(todoList.todos.some((todo: todo) => todo.name === "Vipul")).toBe(true);
     });
 
-    it("doesn't contain a user named 'Santa'", () => {
+    it("doesn't contain a todo named 'Santa'", () => {
         expect(todoList.todos.some((todo: todo) => todo.name === "Santa")).toBe(false);
     });
 
-    it("has two users that are true", () => {
+    it("has two todos that are true", () => {
         expect(todoList.todos.filter((todo: todo) => todo.status === true).length).toBe(2);
     });
 
 });
 
-describe("Misbehaving User List", () => {
+describe("Misbehaving Todo List", () => {
     let todoList: TodoListComponent;
     let fixture: ComponentFixture<TodoListComponent>;
 
