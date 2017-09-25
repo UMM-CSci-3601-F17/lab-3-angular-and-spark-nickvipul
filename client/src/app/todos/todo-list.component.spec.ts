@@ -1,117 +1,117 @@
 import {ComponentFixture, TestBed, async} from "@angular/core/testing";
-import {User} from "./todo";
-import {UserListComponent} from "./todo-list.component";
-import {UserListService} from "./todo-list.service";
+import {todo} from "./todo";
+import {TodoListComponent} from "./todo-list.component";
+import {TodoListService} from "./todo-list.service";
 import {Observable} from "rxjs";
 
-describe("User list", () => {
+describe("Todo list", () => {
 
-    let userList: UserListComponent;
-    let fixture: ComponentFixture<UserListComponent>;
+    let todoList: TodoListComponent;
+    let fixture: ComponentFixture<TodoListComponent>;
 
-    let userListServiceStub: {
-        getUsers: () => Observable<User[]>
+    let todoListServiceStub: {
+        getTodos: () => Observable<todo[]>
     };
 
     beforeEach(() => {
         // stub UserService for test purposes
-        userListServiceStub = {
-            getUsers: () => Observable.of([
+        todoListServiceStub = {
+            getTodos: () => Observable.of([
                 {
-                    id: "chris_id",
-                    name: "Chris",
-                    age: 25,
-                    company: "UMM",
-                    email: "chris@this.that"
+                    id: "nick_id",
+                    owner: "Nick",
+                    status: true,
+                    body: "UMM",
+                    category: "student"
                 },
                 {
-                    id: "pat_id",
-                    name: "Pat",
-                    age: 37,
-                    company: "IBM",
-                    email: "pat@something.com"
+                    id: "vipul_id",
+                    owner: "Vipul",
+                    status: false,
+                    body: "UMM",
+                    category: "person"
                 },
                 {
-                    id: "jamie_id",
-                    name: "Jamie",
-                    age: 37,
-                    company: "Frogs, Inc.",
-                    email: "jamie@frogs.com"
+                    id: "nic_id",
+                    owner: "Nic",
+                    status: true,
+                    body: "UMM",
+                    category: "professor"
                 }
             ])
         };
 
         TestBed.configureTestingModule({
             //imports: [PipeModule],
-            declarations: [UserListComponent],
+            declarations: [TodoListComponent],
             // providers:    [ UserListService ]  // NO! Don't provide the real service!
             // Provide a test-double instead
-            providers: [{provide: UserListService, useValue: userListServiceStub}]
+            providers: [{provide: TodoListService, useValue: todoListServiceStub}]
         })
     });
 
     beforeEach(async(() => {
         TestBed.compileComponents().then(() => {
-            fixture = TestBed.createComponent(UserListComponent);
-            userList = fixture.componentInstance;
+            fixture = TestBed.createComponent(TodoListComponent);
+            todoList = fixture.componentInstance;
             fixture.detectChanges();
         });
     }));
 
-    it("contains all the users", () => {
-        expect(userList.users.length).toBe(3);
+    it("contains all the todos", () => {
+        expect(todoList.todos.length).toBe(3);
     });
 
-    it("contains a user named 'Chris'", () => {
-        expect(userList.users.some((user: User) => user.name === "Chris")).toBe(true);
+    it("contains a user named 'Nick'", () => {
+        expect(todoList.todos.some((todo: todo) => todo.name === "Nick")).toBe(true);
     });
 
-    it("contain a user named 'Jamie'", () => {
-        expect(userList.users.some((user: User) => user.name === "Jamie")).toBe(true);
+    it("contain a user named 'Vipul'", () => {
+        expect(todoList.todos.some((todo: todo) => todo.name === "Vipul")).toBe(true);
     });
 
     it("doesn't contain a user named 'Santa'", () => {
-        expect(userList.users.some((user: User) => user.name === "Santa")).toBe(false);
+        expect(todoList.todos.some((todo: todo) => todo.name === "Santa")).toBe(false);
     });
 
-    it("has two users that are 37 years old", () => {
-        expect(userList.users.filter((user: User) => user.age === 37).length).toBe(2);
+    it("has two users that are true", () => {
+        expect(todoList.todos.filter((todo: todo) => todo.status === true).length).toBe(2);
     });
 
 });
 
 describe("Misbehaving User List", () => {
-    let userList: UserListComponent;
-    let fixture: ComponentFixture<UserListComponent>;
+    let todoList: TodoListComponent;
+    let fixture: ComponentFixture<TodoListComponent>;
 
-    let userListServiceStub: {
-        getUsers: () => Observable<User[]>
+    let todoListServiceStub: {
+        getTodos: () => Observable<todo[]>
     };
 
     beforeEach(() => {
         // stub UserService for test purposes
-        userListServiceStub = {
-            getUsers: () => Observable.create(observer => {
+        todoListServiceStub = {
+            getTodos: () => Observable.create(observer => {
                 observer.error("Error-prone observable");
             })
         };
 
         TestBed.configureTestingModule({
-            declarations: [UserListComponent],
-            providers: [{provide: UserListService, useValue: userListServiceStub}]
+            declarations: [TodoListComponent],
+            providers: [{provide: TodoListService, useValue: todoListServiceStub}]
         })
     });
 
     beforeEach(async(() => {
         TestBed.compileComponents().then(() => {
-            fixture = TestBed.createComponent(UserListComponent);
-            userList = fixture.componentInstance;
+            fixture = TestBed.createComponent(TodoListComponent);
+            todoList = fixture.componentInstance;
             fixture.detectChanges();
         });
     }));
 
-    it("generates an error if we don't set up a UserListService", () => {
+    it("generates an error if we don't set up a TodoListService", () => {
         // Since the observer throws an error, we don't expect users to be defined.
-        expect(userList.users).toBeUndefined();
+        expect(todoList.users).toBeUndefined();
     });
 });
