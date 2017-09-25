@@ -4,22 +4,22 @@ import {Http} from '@angular/http';
 import {Observable} from "rxjs";
 import "rxjs/add/operator/map";
 
-import {User} from './todo';
+import {todo} from './todo';
 import {environment} from "../../environments/environment";
 
 @Injectable()
-export class UserListService {
-    private userUrl: string = environment.API_URL + "users";
+export class TodoListService {
+    private todoUrl: string = environment.API_URL + "todos";
 
     constructor(private http: Http) {
     }
 
-    getUsers(): Observable<User[]> {
-        let observable: Observable<any> = this.http.request(this.userUrl);
+    getTodos(): Observable<todo[]> {
+        let observable: Observable<any> = this.http.request(this.todoUrl);
         return observable.map(res => res.json());
     }
 
-    getUserById(id: string): Observable<User> {
-        return this.http.request(this.userUrl + "/" + id).map(res => res.json());
+    getTodosById(id: string): Observable<todo> {
+        return this.http.request(this.todoUrl + "/" + id).map(res => res.json());
     }
 }
