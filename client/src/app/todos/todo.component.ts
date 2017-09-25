@@ -1,23 +1,23 @@
 import {Component, OnInit} from '@angular/core';
-import {UserListService} from "./todo-list.service";
-import {User} from "./todo";
+import {TodoListService} from "./todo-list.service";
+import {todo} from "./todo";
 
 @Component({
-    selector: 'user-component',
+    selector: 'todo-component',
     templateUrl: 'todo.component.html'
 })
-export class UserComponent implements OnInit {
-    public user: User = null;
+export class TodoComponent implements OnInit {
+    public todo: todo = null;
     private id: string;
 
-    constructor(private userListService: UserListService) {
+    constructor(private todoListService: TodoListService) {
         // this.users = this.userListService.getUsers();
     }
 
     private subscribeToServiceForId() {
         if (this.id) {
-            this.userListService.getUserById(this.id).subscribe(
-                user => this.user = user,
+            this.todoListService.getTodoById(this.id).subscribe(
+                todo => this.todo = todo,
                 err => {
                     console.log(err);
                 }
