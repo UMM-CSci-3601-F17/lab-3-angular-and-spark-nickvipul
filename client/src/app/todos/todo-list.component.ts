@@ -22,7 +22,7 @@ export class TodoListComponent implements OnInit {
 
     }
 
-    public filterTodos(searchOwner: string, searchStatus: string, searchBody: string, searchCategory:string, limitTodos: number): todo[] {
+    public filterTodos(searchOwner: string, searchStatus: string, searchBody: string, searchCategory:string): todo[] {
 
         this.filteredTodos = this.todos;
 
@@ -59,15 +59,6 @@ export class TodoListComponent implements OnInit {
                 return !searchCategory || todo.category.toLowerCase().indexOf(searchCategory) !== -1;
             })
         }
-
-        // Limit todos
-        if(limitTodos != null) {
-            this.filteredTodos = this.filteredTodos.filter(todo => {
-
-            })
-        }
-
-
         return this.filteredTodos;
     }
 
