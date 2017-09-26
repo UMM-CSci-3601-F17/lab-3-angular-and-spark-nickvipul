@@ -1,25 +1,58 @@
+<head>
+    <style type="text/css">
+        .list-group #title {
+            font-size: 60px;
+            color: #0099cc;
+            text-align: center;
+            list-style: none;
+        }
+        .list-group-item-info {
+            text-align: center;
+            margin-left: 1%;
+            margin-right: 1%;
+            letter-spacing: 3px;
+        }
+        .list-group-item {
+            padding: 3%;
+            margin-top: 2%;
+            padding-right: 50px;
+            line-height: 200%;
+            border: none;
+            background-color: white;
+        }
+
+    </style>
+</head>
+<br>
 <ul class="list-group">
+    <li id="title">Todo List</li>
     <li class="list-group-item list-group-item-info">
 
         <!-- The names userName and userAge, different from searchName and searchAge, are being
         used here only to illustrate that these inputs are not necessarily explicitly referencable from within
         the typescript. Unless made to do so by defining a userName variable within this component's typescript file-->
-        <input #input type="text" placeholder="Filter by name" (input)="userName = $event.target.value">
-        <input #input type="number" placeholder="Filter by age" (input)="userAge = $event.target.value">
-
+        <input #input type="text" placeholder="Filter by Owner" (input)="todoOwner = $event.target.value">
+        <input #input type="text" placeholder="Filter by Status" (input)="todoStatus = $event.target.value">
+        <input #input type="text" placeholder="Filter by Body" (input)="todoBody = $event.target.value">
+        <input #input type="text" placeholder="Filter by Category" (input)="todoCategory = $event.target.value">
+        <!-- <input #input type="number" placeholder="Filter by Limit" (input)="todoLimit = $event.target.value"> -->
     </li>
-    <li id="title" class="list-group-item list-group-item-info">User Name</li>
-</ul>
 
-<ul class="list-group" *ngIf="users; else usersError">
-    <li id="users" *ngFor="let user of this.filterUsers(userName, userAge)" class="list-group-item">
-        {{ user.name }} is {{ user.age }} years old
+</ul>
+<br>
+<ul class="list-group" *ngIf="todos; else todosError">
+    <li id="todos" *ngFor="let todo of this.filterTodos(todoOwner, todoStatus, todoBody, todoCategory)" class="list-group-item" style="background-color: #ffffcc;">
+        Owner: {{ todo.owner }} <br>
+        Status: {{ todo.status }} <br>
+        Category: {{ todo.category }} <br>
+        Body: {{ todo.body }}
     </li>
 </ul>
+<br>
 <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
-<ng-template #usersError>
+<ng-template #todosError>
     <p>
-        There was a problem loading the users. Possibly the server is down or perhaps there are network issues.
+        There was a problem loading the todos. Possibly the server is down or perhaps there are network issues.
     </p>
     <p>
         Please wait a bit and try again.
