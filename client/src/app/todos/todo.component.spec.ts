@@ -11,13 +11,13 @@ describe("Todo component", () => {
     let fixture: ComponentFixture<TodoComponent>;
 
     let todoListServiceStub: {
-        getUserById: (TodoId: string) => Observable<todo>
+        getTodoById: (TodoId: string) => Observable<todo>
     };
 
     beforeEach(() => {
         // stub UserService for test purposes
         todoListServiceStub = {
-            getUserById: (TodoId: string) => Observable.of([
+            getTodoById: (TodoId: string) => Observable.of([
                 {
                     id: "nick_id",
                     owner: "Nick",
@@ -39,7 +39,7 @@ describe("Todo component", () => {
                     body: "UMM",
                     category: "professor"
                 }
-            ].find(user => user.id === TodoId))
+            ].find(todo => todo.id === TodoId))
         };
 
         TestBed.configureTestingModule({
@@ -60,7 +60,7 @@ describe("Todo component", () => {
         todoComponent.setId("nick_id");
         expect(todoComponent.todo).toBeDefined();
         expect(todoComponent.todo.owner).toBe("Nick");
-        expect(todoComponent.user.category).toBe("student");
+        expect(todoComponent.todo.category).toBe("student");
     });
 
     it("returns undefined for Santa", () => {
