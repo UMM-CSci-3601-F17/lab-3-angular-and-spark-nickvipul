@@ -13,8 +13,8 @@
     <li id="title" class="list-group-item list-group-item-info">Todo Owner</li>
 </ul>
 
-<ul class="list-group" *ngIf="users; else usersError">
-    <li id="todos" *ngFor="let todo of this.filterUsers(todoOwner, todoStatus, todoCategory, todoBody)" class="list-group-item">
+<ul class="list-group" *ngIf="todos; else todosError">
+    <li id="todos" *ngFor="let todo of this.filterTodos(todo.owner, todo.status, todo.category, todo.body)" class="list-group-item">
         {{ todo.owner }} has a status of {{todo.status}}
         <br>
         It's in the category of {{todo.category}}

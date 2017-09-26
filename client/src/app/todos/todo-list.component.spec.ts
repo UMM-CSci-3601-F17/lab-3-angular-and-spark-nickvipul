@@ -63,15 +63,15 @@ describe("Todo list", () => {
     });
 
     it("contains a todo named 'Nick'", () => {
-        expect(todoList.todos.some((todo: todo) => todo.name === "Nick")).toBe(true);
+        expect(todoList.todos.some((todo: todo) => todo.owner === "Nick")).toBe(true);
     });
 
     it("contain a todo named 'Vipul'", () => {
-        expect(todoList.todos.some((todo: todo) => todo.name === "Vipul")).toBe(true);
+        expect(todoList.todos.some((todo: todo) => todo.owner === "Vipul")).toBe(true);
     });
 
     it("doesn't contain a todo named 'Santa'", () => {
-        expect(todoList.todos.some((todo: todo) => todo.name === "Santa")).toBe(false);
+        expect(todoList.todos.some((todo: todo) => todo.owner === "Santa")).toBe(false);
     });
 
     it("has two todos that are true", () => {
@@ -111,7 +111,7 @@ describe("Misbehaving Todo List", () => {
     }));
 
     it("generates an error if we don't set up a TodoListService", () => {
-        // Since the observer throws an error, we don't expect users to be defined.
-        expect(todoList.users).toBeUndefined();
+        // Since the observer throws an error, we don't expect todos to be defined.
+        expect(todoList.todos).toBeUndefined();
     });
 });

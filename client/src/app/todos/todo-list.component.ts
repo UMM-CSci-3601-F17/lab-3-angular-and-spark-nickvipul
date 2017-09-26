@@ -10,7 +10,7 @@ import {todo} from "./todo";
 
 export class TodoListComponent implements OnInit {
     //These are public so that tests can reference them (.spec.ts)
-    public todo: todo[];
+    public todos: todo[];
     public filteredTodos: todo[];
 
     //Inject the TodoListService into this component.
@@ -24,7 +24,7 @@ export class TodoListComponent implements OnInit {
 
     public filterTodos(searchOwner: string, searchStatus: string, searchBody: string, searchCategory:string, limitTodos: number): todo[] {
 
-        this.filteredTodos = this.todo;
+        this.filteredTodos = this.todos;
 
         // Filter by owner
         if (searchOwner != null) {

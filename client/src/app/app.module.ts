@@ -11,6 +11,8 @@ import {UserComponent} from './users/user.component';
 import {Routing} from './app.routes';
 import {FormsModule} from '@angular/forms';
 import {APP_BASE_HREF} from "@angular/common";
+import {TodoListComponent} from "./todos/todo-list.component";
+import {TodoListService} from "./todos/todo-list.service";
 
 
 @NgModule({
@@ -27,9 +29,12 @@ import {APP_BASE_HREF} from "@angular/common";
         NavbarComponent,
         UserListComponent,
         UserComponent,
+        TodoListComponent
     ],
     providers: [
         UserListService,
+        {provide: APP_BASE_HREF, useValue: '/'},
+        TodoListService,
         {provide: APP_BASE_HREF, useValue: '/'}
     ],
     bootstrap: [AppComponent]
