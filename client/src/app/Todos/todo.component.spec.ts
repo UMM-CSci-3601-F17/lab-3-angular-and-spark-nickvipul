@@ -1,5 +1,5 @@
 import {ComponentFixture, TestBed, async} from "@angular/core/testing";
-import {todo} from "./todo";
+import {Todo} from "./todo";
 import {TodoComponent} from "./todo.component";
 import {TodoListService} from "./todo-list.service";
 import {Observable} from "rxjs";
@@ -11,35 +11,35 @@ describe("Todo component", () => {
     let fixture: ComponentFixture<TodoComponent>;
 
     let todoListServiceStub: {
-        getTodoById: (TodoId: string) => Observable<todo>
+        getTodoById: (todoId: string) => Observable<Todo>
     };
 
     beforeEach(() => {
-        // stub UserService for test purposes
+        // stub TodoService for test purposes
         todoListServiceStub = {
-            getTodoById: (TodoId: string) => Observable.of([
+            getTodoById: (todoId: string) => Observable.of([
                 {
-                    id: "nick_id",
-                    owner: "Nick",
-                    status: true,
-                    body: "UMM",
-                    category: "student"
-                },
-                {
-                    id: "vipul_id",
-                    owner: "Vipul",
+                    _id: "christopher_id",
+                    owner: "Christopher",
                     status: false,
-                    body: "UMM",
-                    category: "person"
+                    body: "UMN",
+                    category: "christopher@that.this"
                 },
                 {
-                    id: "nic_id",
-                    owner: "Nic",
+                    _id: "pan_id",
+                    owner: "Pan",
                     status: true,
-                    body: "UMM",
-                    category: "professor"
+                    body: "Intel",
+                    category: "pan@somewhere.com"
+                },
+                {
+                    _id: "jamison_id",
+                    owner: "Jamison",
+                    status: false,
+                    body: "Fish, Inc.",
+                    category: "jamie@fish.com"
                 }
-            ].find(todo => todo.id === TodoId))
+            ].find(todo => todo._id === todoId))
         };
 
         TestBed.configureTestingModule({
@@ -56,15 +56,15 @@ describe("Todo component", () => {
         });
     }));
 
-    it("can retrieve Nick by ID", () => {
-        todoComponent.setId("nick_id");
+    it("can retrieve Pan by ID", () => {
+        todoComponent.setId("pan_id");
         expect(todoComponent.todo).toBeDefined();
-        expect(todoComponent.todo.owner).toBe("Nick");
-        expect(todoComponent.todo.category).toBe("student");
+        expect(todoComponent.todo.owner).toBe("Pan");
+        expect(todoComponent.todo.category).toBe("pan@somewhere.com");
     });
 
-    it("returns undefined for Santa", () => {
-        todoComponent.setId("Santa");
+    it("returns undefined for stuff", () => {
+        todoComponent.setId("stuff");
         expect(todoComponent.todo).not.toBeDefined();
     });
 

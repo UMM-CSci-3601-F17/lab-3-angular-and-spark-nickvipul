@@ -1,5 +1,5 @@
 import {ComponentFixture, TestBed, async} from "@angular/core/testing";
-import {todo} from "./todo";
+import {Todo} from "./todo";
 import {TodoListComponent} from "./todo-list.component";
 import {TodoListService} from "./todo-list.service";
 import {Observable} from "rxjs";
@@ -10,7 +10,7 @@ describe("Todo list", () => {
     let fixture: ComponentFixture<TodoListComponent>;
 
     let todoListServiceStub: {
-        getTodos: () => Observable<todo[]>
+        getTodos: () => Observable<Todo[]>
     };
 
     beforeEach(() => {
@@ -18,25 +18,25 @@ describe("Todo list", () => {
         todoListServiceStub = {
             getTodos: () => Observable.of([
                 {
-                    id: "nick_id",
-                    owner: "Nick",
-                    status: true,
-                    body: "UMM",
-                    category: "student"
-                },
-                {
-                    id: "vipul_id",
-                    owner: "Vipul",
+                    _id: "christopher_id",
+                    owner: "Christopher",
                     status: false,
-                    body: "UMM",
-                    category: "person"
+                    body: "UMN",
+                    category: "christopher@that.this"
                 },
                 {
-                    id: "nic_id",
-                    owner: "Nic",
+                    _id: "pan_id",
+                    owner: "Pan",
                     status: true,
-                    body: "UMM",
-                    category: "professor"
+                    body: "Intel",
+                    category: "pan@somewhere.com"
+                },
+                {
+                    _id: "jamison_id",
+                    owner: "Jamison",
+                    status: false,
+                    body: "Fish, Inc.",
+                    category: "jamie@fish.com"
                 }
             ])
         };
@@ -44,7 +44,7 @@ describe("Todo list", () => {
         TestBed.configureTestingModule({
             //imports: [PipeModule],
             declarations: [TodoListComponent],
-            // providers:    [ UserListService ]  // NO! Don't provide the real service!
+            // providers:    [ TodoListService ]  // NO! Don't provide the real service!
             // Provide a test-double instead
             providers: [{provide: TodoListService, useValue: todoListServiceStub}]
         })
@@ -62,20 +62,32 @@ describe("Todo list", () => {
         expect(todoList.todos.length).toBe(3);
     });
 
-    it("contains a todo named 'Nick'", () => {
-        expect(todoList.todos.some((todo: todo) => todo.owner === "Nick")).toBe(true);
+    it("contains a todo owned by 'Christopher'", () => {
+        expect(todoList.todos.some((todo: Todo) => todo.owner === "Christopher")).toBe(true);
     });
 
-    it("contain a todo named 'Vipul'", () => {
-        expect(todoList.todos.some((todo: todo) => todo.owner === "Vipul")).toBe(true);
+    it("contain a todo owned by 'Jamison'", () => {
+        expect(todoList.todos.some((todo: Todo) => todo.owner === "Jamison")).toBe(true);
     });
 
-    it("doesn't contain a todo named 'Santa'", () => {
-        expect(todoList.todos.some((todo: todo) => todo.owner === "Santa")).toBe(false);
+    it("contain a todo owned by 'Jamison'", () => {
+        expect(todoList.todos.some((todo: Todo) => todo.owner === "Jamison")).toBe(true);
     });
 
-    it("has two todos that are true", () => {
-        expect(todoList.todos.filter((todo: todo) => todo.status === true).length).toBe(2);
+    it("doesn't contain a todo owned by 'stuff'", () => {
+        expect(todoList.todos.some((todo: Todo) => todo.owner === "stuff")).toBe(false);
+    });
+
+    it("has two todos that are false years old", () => {
+        expect(todoList.todos.filter((todo: Todo) => todo.status == false).length).toBe(2);
+    });
+
+    it("contains a todo with the body  'Fish, Inc.", () => {
+        expect(todoList.todos.some((todo: Todo) => todo.body === "Fish, Inc.")).toBe(true);
+    });
+
+    it("contains a todo with the body  'pan@somewhere.com", () => {
+        expect(todoList.todos.some((todo: Todo) => todo.category === "pan@somewhere.com")).toBe(true);
     });
 
 });
@@ -85,11 +97,11 @@ describe("Misbehaving Todo List", () => {
     let fixture: ComponentFixture<TodoListComponent>;
 
     let todoListServiceStub: {
-        getTodos: () => Observable<todo[]>
+        getTodos: () => Observable<Todo[]>
     };
 
     beforeEach(() => {
-        // stub UserService for test purposes
+        // stub TodoService for test purposes
         todoListServiceStub = {
             getTodos: () => Observable.create(observer => {
                 observer.error("Error-prone observable");
