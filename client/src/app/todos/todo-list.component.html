@@ -15,11 +15,10 @@
 
 <ul class="list-group" *ngIf="todos; else todosError">
     <li id="todos" *ngFor="let todo of this.filterTodos(todoOwner, todoStatus, todoBody, todoCategory)" class="list-group-item">
-        {{ todo.owner }} has a status of {{todo.status}}
-        <br>
-        It's in the category of {{todo.category}}
-        <br>
-        with a body of {{todo.body}}
+        Owner: {{ todo.owner }} <br>
+        Status: {{ todo.status }} <br>
+        Category: {{ todo.category }} <br>
+        Body: {{ todo.body }}
     </li>
 </ul>
 <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
