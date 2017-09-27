@@ -24,3 +24,7 @@ There are different build.gradle across the project for various distinct tests. 
 ## How does the navbar work in this project? Is our SparkJava server the only thing doing routing?
 
 The nav bar is the navigation bar, usually at the top of a random html page. It contains links that directs the user to pages like /about, /[facilities etc.] for the specific website. Therefore, we can say it is where the site's main informative pages are loaded or seen from.
+
+## What does the todo-list.service.ts do? Why is it not just done in the todo-list.component.ts?
+The todo-list.service.ts sends a request to the server for either users with a specified id or just all of them.
+It's not in user-list.component.ts because todo-list.service.ts is where the data is handled and it deals with the server separately. 
